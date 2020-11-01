@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+## Starter Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- css provided (global styles, styled components)
+- folders/files already setup
+- all imports included (warnings)
+- index.js for easier imports
 
-## Available Scripts
+## Styled Components
 
-In the project directory, you can run:
+[Styled-Components - Main Docs](https://styled-components.com/)
 
-### `npm start`
+```jsx
+import styled from "styled-components";
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+const ReactComponent = () => {
+ // logic here
+ return <Wrapper>
+ {some content}
+ </Wrapper>
+}
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+const Wrapper = styled.htmlElement`
+write your styles here
+`
+export default ReactComponent
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## React Icons
 
-### `npm run build`
+[React Icons - Main Docs](https://react-icons.github.io/react-icons/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```jsx
+import { FiUsers, FiUserPlus } from 'react-icons/fi';
+<FiUsers className='nameOfTheClass'> </FiUsers>;
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## React Router Dom
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+version used - "react-router-dom": "^5.2.0",
 
-### `npm run eject`
+- [react-router-dom - Main Docs](https://reactrouter.com/web/guides/quick-start)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- <Switch> renders the first child <Route> that matches
+- A <Route path="*"> always matches
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Gihthub API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [Root Endpoint](https://api.github.com)
+- [Get User](https://api.github.com/users/wesbos)
+- [Repos](https://api.github.com/users/john-smilga/repos?per_page=100)
+- [Followers](https://api.github.com/users/john-smilga/followers)
+- [Rate Limit](https://api.github.com/rate_limit)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
 
-## Learn More
+## Fusion Charts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Fusion Charts - Main Docs](https://www.fusioncharts.com/)
+- [First React Chart](https://www.fusioncharts.com/dev/getting-started/react/your-first-chart-using-react)
+- [List Of Charts](https://www.fusioncharts.com/dev/chart-guide/list-of-charts)
+- [Themes](https://www.fusioncharts.com/dev/themes/introduction-to-themes)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Auth0
 
-### Code Splitting
+- [Auth0 - Main Docs](https://auth0.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Create Application
+- Choose : Single Page Web Applications
+- Choose : React
+- Go to Settings Tab
+- Copy/Paste Domain, ClientID - can be public (or use .env)
+- Add Domain -
+  for now http://localhost:3000 (DON'T COPY PASTE FROM URL BAR)
 
-### Analyzing the Bundle Size
+  - Allowed Callback URLs
+  - Allowed Logout URLs
+  - Allowed Web Origins
+  - SAVE CHANGES!!!!!!!!!!!!!!!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Connections
+  email,social
 
-### Making a Progressive Web App
+- [React SDK Docs](https://auth0.com/docs/libraries/auth0-react)
+- [REACT SDK API Docs](https://auth0.github.io/auth0-react/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Deployment
 
-### Advanced Configuration
+[Netlify](https://www.netlify.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Additional Info
 
-### Deployment
+#### Redirects with react-router-dom
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+In order for routing to work on netlify, redirects was added to the public folder
 
-### `npm run build` fails to minify
+- \_redirects file in public
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+
+/*    /index.html   200
+
+```
+
+[Redirects Blog Post](https://dev.to/dance2die/page-not-found-on-netlify-with-react-router-58mc)
+
+#### Warnings and create-react-app
+
+package.json
+
+```js
+"build": "CI= react-scripts build",
+```
+
+[create-react-app Warning Fix Blog Post](https://community.netlify.com/t/how-to-fix-build-failures-with-create-react-app-in-production/17752)
