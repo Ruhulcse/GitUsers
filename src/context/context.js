@@ -41,7 +41,7 @@ const rootUrl = 'https://api.github.com';
                  if(followers.status === status){
                      setFollowers(followers.value.data);
                  }
-             })
+             }).catch(err=>console.log(err));
          }
          else{
              toggolError(true,'there is not user with that user name')
