@@ -17,11 +17,37 @@ const rootUrl = 'https://api.github.com';
 
      //request loading
      const [requests, setRequests ] = useState(0);
-     const [loading, setLoading ] = useState(false);
+     const [isLoading, setIsLoading ] = useState(false);
      //error
      const [error,setError] = useState({show:false,msg:""});
 
-   
+     const searchGithubUser = async(user)=>{
+          toggolError()
+         setIsLoading(true)
+         const response = await axios(`${rootUrl}/users/${user}`).
+         catch(err => console.log(err))
+         console.log(response);
+         if(response){
+             setGithubuser(response.data);
+             // repos
+             const {login,followers_url} = response.data;
+             axios(`${rootUrl}/users/${login}/repos?per_page=100`).
+             then(response=>{
+                 setRepos(response.data);
+             });
+
+             //followers
+             axios(`${followers_url}?per_page=100`).
+             then(response=>{
+                 setFollowers(response.data);
+             });
+         }
+         else{
+             toggolError(true,'there is not user with that user name')
+         }
+         checkRequests();
+         setIsLoading(false);
+     }
      //check lmit late
      const checkRequests = () =>{
          axios(`${rootUrl}/rate_limit`)
@@ -50,7 +76,10 @@ const rootUrl = 'https://api.github.com';
          repos,
          followers,
          requests,
-         error,}}>{children}
+         error,
+         searchGithubUser,
+         isLoading,
+         }}>{children}
      </GithubContext.Provider>
  }
 

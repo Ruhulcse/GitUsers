@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
-  return <Wrapper>Navbar component</Wrapper>
+  return <Wrapper></Wrapper>
 };
 
 const Wrapper = styled.nav`
