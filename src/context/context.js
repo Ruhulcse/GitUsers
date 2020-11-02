@@ -27,20 +27,21 @@ const rootUrl = 'https://api.github.com';
          const response = await axios(`${rootUrl}/users/${user}`).
          catch(err => console.log(err))
          console.log(response);
-         if(response){
+         if(response){ 
              setGithubuser(response.data);
              // repos
              const {login,followers_url} = response.data;
-             axios(`${rootUrl}/users/${login}/repos?per_page=100`).
-             then(response=>{
-                 setRepos(response.data);
-             });
-
-             //followers
-             axios(`${followers_url}?per_page=100`).
-             then(response=>{
-                 setFollowers(response.data);
-             });
+             await Promise.allSettled([axios(`${rootUrl}/users/${login}/repos?per_page=100`),axios(`${followers_url}?per_page=100`)])
+             .then((result)=>{
+                 const [repos,followers] = result;
+                 const status = 'fulfilled';
+                 if(repos.status === status){
+                     setRepos(repos.value.data);
+                 }
+                 if(followers.status === status){
+                     setFollowers(followers.value.data);
+                 }
+             })
          }
          else{
              toggolError(true,'there is not user with that user name')
